@@ -69,6 +69,8 @@ defmodule SiteEncrypt.Phoenix do
 
   @doc false
   def start_link(endpoint) do
+    IO.inspect(endpoint, label: "SiteEncrypt.Phoenix config")
+
     Parent.Supervisor.start_link(
       children(endpoint),
       name: {:via, Elixir.Registry, {Registry, endpoint}}
