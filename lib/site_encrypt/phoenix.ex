@@ -96,7 +96,7 @@ defmodule SiteEncrypt.Phoenix do
   end
 
   defp start_endpoint(endpoint) do
-    config = endpoint.certification()
+    config = endpoint.certification() |> IO.inspect(label: "start_endpoint/1 cert config")
     Registry.store_config(endpoint, config)
     SiteEncrypt.initialize_certs(config)
     endpoint.start_link([])
