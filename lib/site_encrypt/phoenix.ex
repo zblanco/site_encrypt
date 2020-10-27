@@ -39,9 +39,12 @@ defmodule SiteEncrypt.Phoenix do
   """
   defmacro configure_https(config, https_opts \\ []) do
     quote bind_quoted: [config: config, https_opts: https_opts] do
+
+      IO.inspect(config, label: "config")
+      IO.inspect(https_opts, label: "https_opts")
+
       https_config =
         (Keyword.get(config, :https) || [])
-        |> IO.inspect(label: "https_config")
         |> Config.Reader.merge(https_opts)
         |> IO.inspect(label: "1")
         |> Config.Reader.merge(SiteEncrypt.https_keys(__MODULE__))
