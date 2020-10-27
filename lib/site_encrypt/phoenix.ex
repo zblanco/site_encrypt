@@ -41,8 +41,11 @@ defmodule SiteEncrypt.Phoenix do
     quote bind_quoted: [config: config, https_opts: https_opts] do
       https_config =
         (Keyword.get(config, :https) || [])
+        |> IO.inspect(label: "https_config")
         |> Config.Reader.merge(https_opts)
+        |> IO.inspect(label: "1")
         |> Config.Reader.merge(SiteEncrypt.https_keys(__MODULE__))
+        |> IO.inspect(label: "2")
 
       Keyword.put(config, :https, https_config)
     end
